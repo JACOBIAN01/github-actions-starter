@@ -1,0 +1,29 @@
+name: Backend Test
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+
+    defaults:
+      run:
+        working-directory: backend 
+
+    steps:
+      - name: Setup
+        uses: actions/checkout@v4 
+
+      - name: Node setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies    
+        run: npm ci 
+
+      - name: Run tests
+        run: npm test
